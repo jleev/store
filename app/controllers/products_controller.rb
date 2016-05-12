@@ -1,5 +1,9 @@
 class ProductsController < ApplicationController
 
+  def home
+
+  end
+
   def all_products
     @title = "All Instruments"
     @products = Product.all
