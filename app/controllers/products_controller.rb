@@ -24,4 +24,46 @@ class ProductsController < ApplicationController
     @keyboard = Product.third
   end  
 
+  def index
+    @products = Product.all
+  end
+
+  def show
+    @product = Product.find(params[:id])  
+  end
+
+  def new
+    
+  end
+
+  def create
+    @product = Product.create(
+      name: params[:name],
+      price: params[:prices],
+      image: params[:image],
+      description: params[:description],
+      stock: params[:stock]
+      )
+    render 'show.html.erb'
+  end
+
+  def edit
+    @product = Product.find(params[:id])
+  end
+
+  def update
+    @product = Product.find(params[:id])
+
+      @product.update(
+      name: params[:name],
+      price: params[:prices],
+      image: params[:image],
+      description: params[:description],
+      stock: params[:stock]
+      )
+    
+    render 'show.html.erb'
+
+  end 
+
 end
