@@ -2,7 +2,10 @@
 
 <p><h2>Name:</h2><%= @product.name %></p>
 <p><img src=<%= @product.image %>></p>
-<p><h2>Price:</h2><%= @product.price %></p>
+<p><h2>Price: <%= number_to_currency(@product.price) %></h2></p>
+<p><h2>Sale: <%= @product.sale_message %></h2></p>
+<p><h2>Tax: <%= number_to_currency(@product.tax) %></h2></p>
+<p><h2>Total: <%= number_to_currency(@product.total) %></h2></p>
 <p><h2>Description:</h2><%= @product.description %></p>
 <p><h2>Stock:</h2><%= @product.stock %></p>
 
