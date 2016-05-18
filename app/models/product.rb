@@ -14,7 +14,7 @@ end
 def tax
   price.to_i * TAX
 end
-
+j
 def total
   price.to_i + tax
 end

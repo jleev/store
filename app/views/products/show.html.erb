@@ -1,6 +1,7 @@
 <div class="container">
 
 <p><h2>Name:</h2><%= @product.name %></p>
+<p><h2>Style:</h2><%= @product.style %></p>
 <p><img src=<%= @product.image %>></p>
 <p><h2>Price: <%= number_to_currency(@product.price) %></h2></p>
 <p><h2>Sale: <%= @product.sale_message %></h2></p>
