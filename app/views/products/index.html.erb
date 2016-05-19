@@ -4,7 +4,6 @@
 
 <% @products.each do |product| %>
 <p><h2><a href=/products/<%= product.id %>>Name:</a></h2><%= product.name %></p>
-<!-- <h2><%= link_to product.title, "/products/#{product.id}" %></h2> -->
 <p><h2>Style:</h2><%= product.style %></p>
 <p><img src=<%= product.image %>></p>
 <p><h2>Price:</h2><%= product.price %></p>
