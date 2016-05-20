@@ -16,22 +16,27 @@
 
   <div>
     <%= label_tag :price %>
-    <%= text_field_tag :price, @product.name  %>
+    <%= text_field_tag :price, @product.price  %>
   </div>
 
     <div>
     <%= label_tag :image %>
-    <%= text_field_tag :image, @product.name  %>
+    <%= text_field_tag :image, @product.image  %>
   </div>
 
   <div>
     <%= label_tag :description %>
-    <%= text_field_tag :description, @product.name  %>
+    <%= text_field_tag :description, @product.description %>
   </div>
 
   <div>
     <%= label_tag :stock %>
-    <%= text_field_tag :stock, @product.name  %>
+    <%= text_field_tag :stock, @product.stock  %>
+  </div>
+
+  <div>
+    <%= label_tag :supplier_id %>
+    <%= text_field_tag :supplier_id, @product.supplier_id %>
   </div>
 
   <div>

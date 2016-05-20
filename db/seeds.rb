@@ -6,3 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+suppliers = Supplier.create([{name: 'Gibson', email: 'info@gibson.com', phone: '312-555-1212'}, {name: 'Zildjan', email: 'info@zildjan.com', phone: '312-555-2121'}, {name: 'Brass_Monkey', email: 'info@brass_monkey.com', phone: '312-555-4545'},])
