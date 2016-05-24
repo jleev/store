@@ -16,6 +16,9 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'seed_dump'
 
+gem 'devise'
+
+
 gem 'quiet_assets'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

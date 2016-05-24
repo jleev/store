@@ -1,15 +1,20 @@
-<div class="container">
+    <section>
+     <div class="container">
 
-<h1>Here is a list of the current products</h1>
+      <div class="row">
 
-<% @products.each do |product| %>
-<p><h2><a href=/products/<%= product.id %>>Name:</a></h2><%= product.name %></p>
-<p><h2>Style:</h2><%= product.style %></p>
-<p><img src=<%= product.image %>></p>
-<p><h2>Price:</h2><%= product.price %></p>
-<p><h2>Description:</h2><%= product.description %></p>
-<p><h2>Stock:</h2><%= product.stock %></p>
+        <% @products.each do |product| %>
 
-<% end %>  
+          <div class="col-sm-4">
+            <div class="product_single">
+              <h2><%= product.name %></h2>
+             
+              <p>Price: <%= product.price %></p>
+              <p>Description: <%= product.description %></p>
+            </div>
+          </div>
+        <% end %>
 
-</div>
+      </div>
+      </div>
+    </section>

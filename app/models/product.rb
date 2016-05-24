@@ -1,5 +1,11 @@
 class Product < ActiveRecord::Base
 
+  belongs_to :supplier
+
+  has_many :images
+
+  has_many :orders
+
   TAX = 0.09
 
 def sale_message
@@ -17,6 +23,11 @@ end
 j
 def total
   price.to_i + tax
+end
+
+def image_preview_url
+  images.image.first
+  
 end
 
 end

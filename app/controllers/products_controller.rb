@@ -1,106 +1,75 @@
 class ProductsController < ApplicationController
 
-  def home
-
-  end
-
-  def all_products
-    @title = "All Instruments"
-    @products = Product.all
-  end
-  
-  def guitar
-    @title = "Guitar"
-    @guitar = Product.first
-  end
-
-  def drum
-    @title = "Drums"
-    @drum = Product.second
-  end
-
-  def keyboard
-    @title = "Keyboard"
-    @keyboard = Product.third
-  end  
-
   def index
-   
-   @products = Product.all 
 
-    search_term = params[:search_term]
+    @products = Product.all
     sort_attribute = params[:sort]
-    sort_order = params[:high]
-    discount_price = params[:discount]
-    random_product = params[:id]
+    sort_order = params[:sort_order]
+    discount_value = params[:discount]
 
-    if search_term
-      @products = @products.where("name like ?", "style like ?", "price like ?", "%#{search_term}%", "%#{search_term}%", "%#{search_term}%")
-    end  
-
-    if discount_price
-      @products = @products.where("price < ?", discount_price)
-    end  
-
-    if sort_attribute && sort_order
-    @products = @products.order(sort_attribute => sort_order)
-    else
-    @products = Product.all 
+    if discount_value
+      @novelties = @novelties.where("price < ?", discount_value)
     end
 
-    if discount_price
-      @products = @products.where("price < ?", discount_price)
-    end  
-
-  end
-
-  def show
-    @product = Product.find(params[:id])  
+    if sort_order && sort_attribute
+      @products = @products.order(sort_attribute => sort_order)
+    elsif sort_attribute
+      @products = @products.order(sort_attribute)
+    end
   end
 
   def new
-    
   end
 
   def create
     @product = Product.create(
       name: params[:name],
-      style: params[:style],
-      price: params[:price],
-      image: params[:image],
       description: params[:description],
+      image: params[:image],
+      price: params[:price],
       stock: params[:stock],
-      supplier_id: params[:supplier_id]
       )
-    render 'show.html.erb'
+
+    flash[:success] = "Product Created"
+    redirect_to "/products/#{@product.id}"
+  end
+
+  def show
+    @product = Product.find_by(id: params[:id])
+
+    @tax = @product.tax
+    @total = @product.total
   end
 
   def edit
-    @product = Product.find(params[:id])
+    @product = Product.find_by(id: params[:id])
   end
 
   def update
-    @product = Product.find(params[:id])
-
-      @product.update(
+    @product = product.find_by(id: params[:id])
+    @product.update(
       name: params[:name],
-      style: params[:style],
-      price: params[:price],
-      image: params[:image],
       description: params[:description],
-      stock: params[:stock],
-      supplier_id: params[:supplier_id]
+      image: params[:image],
+      price: params[:price],
+      stock: params[:stock]
       )
-    
-    render 'show.html.erb'
 
-  end 
-
-  def random
-    #@products = Product.all.sample
-    #render 'show.html.erb'
-    product = Product.all.sample
-    redirect_to "/products/#{product.id}"
+    flash[:success] = "Product Updated"
+    redirect_to "/product/#{@product.id}"
   end
 
+  def destroy
+    @product = Product.find_by(id: params[:id])
+    @product.destroy
+
+    flash[:warning] = "Product Created"
+    redirect_to "/"
+  end
+
+  #def random
+    #Product = Product.all.sample
+    #redirect_to "/products/#{novelty.id}"
+  #end
 end
+
