@@ -25,7 +25,6 @@ class ProductsController < ApplicationController
     @product = Product.create(
       name: params[:name],
       description: params[:description],
-      image: params[:image],
       price: params[:price],
       stock: params[:stock],
       )

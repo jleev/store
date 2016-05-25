@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522201611) do
+ActiveRecord::Schema.define(version: 20160525003823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categorized_products", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "images", force: :cascade do |t|
     t.string   "image"
@@ -36,13 +49,13 @@ ActiveRecord::Schema.define(version: 20160522201611) do
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
-    t.string   "description"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.text     "description"
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.string   "style"
     t.integer  "stock"
     t.decimal  "price",       precision: 10, scale: 2
-    t.integer  "supplier_id"
+    t.integer  "supplier_id",                          default: 1
     t.integer  "user_id"
   end
 
