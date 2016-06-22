@@ -3,10 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "products#index"
   
-  
   get '/index' => 'products#index'
-
-  get '/test' => 'products#test'
   
   get '/products/new' => 'products#new'
   post 'products' => 'products#create'
@@ -23,16 +20,16 @@ Rails.application.routes.draw do
   get 'products/:id/edit' => 'products#edit'
   patch 'products/:id' => 'products#update'
 
-  get 'supplier/:id/edit' => 'products#supplier_edit'
-  patch 'supplier/:id' => 'products#supplier_update'
-
-  get '/images/' => 'products#show_images'
-
-  get '/images/first' => 'products#show_images_first'
-
   get '/orders/:id' => 'orders#show'
 
   get '/orders/new' => 'orders#new'
   post '/orders' => 'orders#create'
+
+
+  get '/cart' => 'carted_products#index'
+  post '/carted_products' => 'carted_products#create'
+
+  delete '/carted_products/:id' => 'carted_products#destroy'
+
 
 end

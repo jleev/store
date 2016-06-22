@@ -5,32 +5,41 @@
       <div class="col-sm-8 col-sm-offset-2">
         <div class="product_single">
             <h2><%= @product.name %></h2>
+            <% @product.categories.each do |category| %>
+              <%= category.name %>
+              <% end %>
             <h3><%= @product.sale_message %></h3>
 
             <p>Price: <%= number_to_currency(@product.price.to_i) %></p>
             <p>Tax: <%= number_to_currency(@tax) %></p>
             <p>Total: <%= number_to_currency(@total) %></p>
-
+            <div class="photo">
             <% @product.images.each do |image| %>
-              <img src="<%= image.image %>" class="img-responsive">
+              <img src="<%= image.url %>" class="img-responsive">
             <% end %>
-
+            </div>
             <p>Description: <%= @product.description %></p>
             <h6>Supplier: <%= @product.supplier.name %></h6>
+            <% if user_signed_in? && current_user.admin %>
             <%= link_to "Edit", "/product/#{@product.id}/edit", class: "btn btn-success" %>
             <%= link_to "Delete", "/product/#{@product.id}", {method: :delete, class: "btn btn-danger" }%>
+            <% end %>
         </div>
+        
+        <% if user_signed_in? %>
+
         <h3>Please fill in the form below purchase</h3>
 
  <div>
-<%= form_tag '/orders', method: :post do %>
-    <%= hidden_field_tag :product_id, @product.id%><br>
+<%= form_tag '/carted_products', method: :post do %>
+    <%= hidden_field_tag :product_id, @product.id %><br>
     <%= label_tag :quantity %>
     <%= text_field_tag :quantity %>
-    <%= submit_tag 'Buy Now', class: "btn btn-success" %>
+    <%= submit_tag 'Add to Cart', class: "btn btn-success" %>
   </div>
  <br> 
 
+<% end %>
 <% end %>
       </div>
     </div>

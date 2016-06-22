@@ -1,0 +1,12 @@
+<div class="container">
+
+<h1><%= current_user.email %> Cart</h1>
+
+<% @cart.each do |cart_item| %>
+  <h3><%= cart_item.product.name %> - <%= cart_item.quantity %> x <%= number_to_currency(cart_item.product.price) %> : 
+  <%= link_to 'Remove', "/carted_products/#{cart_item.id}", method: :delete %></h3>
+<% end %>
+
+<%= link_to 'Buy Now!', '/orders', method: :post, class: "btn btn-default" %>
+
+</div>

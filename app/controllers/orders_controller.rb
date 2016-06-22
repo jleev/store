@@ -1,33 +1,37 @@
 class OrdersController < ApplicationController
 
-  def show
-    @order = Order.find(params[:id])
-    @product = Product.find(@order.product_id)
-  end
 
-  def new
 
-  end 
-
+before_action :authenticate_user!
 
   def create
 
-    @order = Order.new(
-      quantity: params[:quantity], 
-      user_id: current_user.id, 
-      product_id: params[:product_id]
-      )
+    @order = Order.create(user_id: current_user.id)
+    ordered_items = current_user.carted_items
 
-    @product = @order.product
-    @order.calculate_subtotal(@product.price)
-    @order.tax = @order.calculate_tax
-    @order.total = @order.calculate_total
+    ordered_items.each do |ordered_item|
+    ordered_item.update(status: 'purchased', order_id: @order.id)
+    end
 
-
+    @order.calculate_figures(@order.carted_products)
     @order.save
-    
+
+    session[:cart_count] = nil
     flash[:success] = "Order Created"
     redirect_to "/orders/#{@order.id}"
   end
 
+  def show
+    @order = Order.find(params[:id])
+    @ordered_products = @order.carted_products
+    unless user_signed_in? && current_user.id == @order.user.id
+      redirect_to '/'
+    end  
+  end
+
+
+
 end
+
+
+
